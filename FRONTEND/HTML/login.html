@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MiBarrio | Iniciar Sesión</title>
+    <!-- Conexión al CSS global -->
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+    <header id="menu-principal">
+        <h1 onclick="window.location.href='/'">🏡 MI BARRIO</h1>
+    </header>
+
+    <main class="contenedor-principal" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <div class="tarjeta-formulario" style="padding: 40px; width: 100%; max-width: 400px; text-align: center;">
+            <h2 style="color: var(--color-barrio); margin-bottom: 10px;">¡Hola de nuevo!</h2>
+            <p style="color: #666; margin-bottom: 30px;">Ingresa con tu correo y contraseña.</p>
+            
+            <form id="form-login" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="email" id="login-email" placeholder="Correo electrónico" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+                <input type="password" id="login-password" placeholder="Contraseña" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+                <button type="submit" class="boton-primario" style="padding: 12px; border: none; cursor: pointer; margin-top: 10px; font-size: 1.1em;">Entrar</button>
+            </form>
+            
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                ¿Aún no tienes cuenta? <a href="/registro" style="color: var(--color-ladrillo); font-weight: bold; text-decoration: none;">Regístrate aquí</a>
+            </p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                <a href="/" style="color: #666; text-decoration: none;">← Volver al Inicio</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="/JS/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MiBarrio | Inicio Profesional</title>
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <header id="menu-principal">
+        <h1 onclick="window.location.href='/'" style="cursor: pointer;">🏡 MI BARRIO</h1>
+        <nav id="nav-dinamico">
+            <a href="/login" class="btn-nav outline">Iniciar Sesión</a>
+            <a href="/registro" class="btn-nav">Registrarse</a>
+        </nav>
+    </header>
+
+    <section class="seccion-bienvenida" style="text-align: center; padding: 80px 20px; background-color: var(--color-tierra); color: white;">
+        <h2 style="font-size: 2.8em; font-weight: 800; margin-bottom: 20px;">El barrio que construimos juntos.</h2>
+        <p style="font-size: 1.2em; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">La falta de comunicación afecta a muchas comunidades. El tiempo que pasamos aislados puede tener una segunda vida si nos conectamos. Descubre cómo pequeñas acciones diarias reducen problemas y mejoran la convivencia.</p>
+        <a href="/registro" class="boton-primario" style="display: inline-block; padding: 15px 40px; font-size: 1.2em; text-decoration: none;">Únete a MiBarrio Ahora</a>
+    </section>
+<!-- Estilos para el efecto de pasar el ratón (Hover) -->
+<style>
+    .contenedor-tarjetas {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .tarjeta-animada {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        width: 300px;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        border-top: 6px solid #2E7D32; /* Borde verde superior */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tarjeta-animada:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Lo que se ve normalmente */
+    .vista-principal {
+        padding: 30px 20px;
+        text-align: center;
+        height: 100%;
+        box-sizing: border-box;
+        transition: opacity 0.4s ease;
+    }
+
+    /* Lo que aparece al poner el mouse encima */
+    .vista-detalle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        /* Oculto por defecto */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+    }
+
+    /* Cuando el mouse pasa por la tarjeta, muestra el detalle y oculta lo principal */
+    .tarjeta-animada:hover .vista-detalle {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .tarjeta-animada:hover .vista-principal {
+        opacity: 0;
+    }
+</style>
+
+<!-- Título de la sección -->
+<h2 style="text-align: center; color: #2E7D32; font-size: 2.5em; margin-bottom: 40px;">Herramientas para tu comunidad</h2>
+
+<!-- Contenedor de las 3 tarjetas -->
+<div class="contenedor-tarjetas">
+
+    <!-- Tarjeta 1: Tablón de Avisos -->
+    <div class="tarjeta-animada">
+        <div class="vista-principal">
+            <div style="font-size: 50px; margin-bottom: 15px;">📢</div>
+            <h3 style="color: #D32F2F; margin: 0 0 15px 0;">Tablón de Avisos</h3>
+            <p style="color: #555; font-size: 0.95em;">Avisos de compra, venta o servicios de vecinos antes de que salgas de tu cuadra.</p>
+        </div>
+        <div class="vista-detalle">
+            <h4 style="color: #D32F2F; margin-bottom: 10px;">Más Información</h4>
+            <p style="color: #444; font-size: 0.9em; margin: 0;">Encuentra plomeros, electricistas o vende lo que ya no usas de forma segura. Todas las publicaciones son verificadas para garantizar que provienen de vecinos reales de la misma colonia.</p>
+        </div>
+    </div>
+
+    <!-- Tarjeta 2: Bache-Tracker -->
+    <div class="tarjeta-animada">
+        <div class="vista-principal">
+            <div style="font-size: 50px; margin-bottom: 15px;">🚧</div>
+            <h3 style="color: #D32F2F; margin: 0 0 15px 0;">Bache-Tracker</h3>
+            <p style="color: #555; font-size: 0.95em;">El reporte de fallas urbanas se puede realizar para arreglar baches o focos fundidos.</p>
+        </div>
+        <div class="vista-detalle">
+            <h4 style="color: #D32F2F; margin-bottom: 10px;">¿Cómo funciona?</h4>
+            <p style="color: #444; font-size: 0.9em; margin: 0;">Sube una foto del problema, y el sistema registrará la ubicación exacta. Generamos un reporte mensual consolidado que se entrega directamente a las autoridades municipales correspondientes.</p>
+        </div>
+    </div>
+
+    <!-- Tarjeta 3: Impacto Ecológico -->
+    <div class="tarjeta-animada">
+        <div class="vista-principal">
+            <div style="font-size: 50px; margin-bottom: 15px;">🌱</div>
+            <h3 style="color: #D32F2F; margin: 0 0 15px 0;">Impacto Ecológico</h3>
+            <p style="color: #555; font-size: 0.95em;">Dejar basura en las calles contamina. Registra tu reciclaje y suma litros de agua ahorrados.</p>
+        </div>
+        <div class="vista-detalle">
+            <h4 style="color: #D32F2F; margin-bottom: 10px;">Mide tu aporte</h4>
+            <p style="color: #444; font-size: 0.9em; margin: 0;">Participa en campañas de limpieza, adopta áreas verdes y visualiza en tiempo real cuántas emisiones de CO2 hemos reducido juntos. Gana insignias virtuales por tu participación.</p>
+        </div>
+    </div>
+
+</div>
+
+    <footer>
+        
+        <p>Derechos reservados a:
+             FELICIANO REYES DYLAN ALEXANDER
+            HERNANDEZ RAMIREZ RONALD OLIVER.</p>
+    </footer>
+
+    <script src="/JS/scripts.js"></script>
+</body>
+</html>
+
+
+

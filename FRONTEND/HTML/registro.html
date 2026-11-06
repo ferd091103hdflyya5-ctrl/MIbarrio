@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MiBarrio | Registro Profesional</title>
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+    <header id="menu-principal">
+        <h1 onclick="window.location.href='/'">🏡 MI BARRIO</h1>
+        <nav id="nav-dinamico">
+            <a href="/login" class="btn-nav outline">Iniciar Sesión</a>
+        </nav>
+    </header>
+
+    <main class="contenedor-principal" style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+        <div class="tarjeta-formulario" style="padding: 40px; width: 100%; max-width: 750px;">
+            <h2 style="color: var(--color-barrio); text-align: center; margin-bottom: 10px;">Únete a nuestra comunidad</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Completa tus datos para crear tu cuenta y conectar con tus vecinos.</p>
+            
+            <form id="form-registro" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                
+                <!-- Columna 1 -->
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" id="reg-nombre" placeholder="Nombre(s)" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="text" id="reg-paterno" placeholder="Apellido Paterno" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="text" id="reg-materno" placeholder="Apellido Materno" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="number" id="reg-edad" placeholder="Edad" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="email" id="reg-email" placeholder="Correo Electrónico" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                </div>
+
+                <!-- Columna 2 -->
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" id="reg-telefono" placeholder="Teléfono (10 números)" pattern="\d{10}" maxlength="10" minlength="10" title="Debe contener exactamente 10 números" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="text" id="reg-domicilio" placeholder="Domicilio Completo" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="text" id="reg-usuario" placeholder="Nombre de Usuario" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                    <input type="password" id="reg-password" placeholder="Contraseña" required style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                </div>
+
+                <!-- Botón de registro -->
+                <div style="grid-column: span 2; text-align: center; margin-top: 10px;">
+                    <button type="submit" class="boton-primario" style="width: 100%; padding: 15px; border: none; cursor: pointer; font-size: 1.1em;">Registrarme</button>
+                    <p style="margin-top: 20px; font-size: 0.9em;">
+                        ¿Ya tienes cuenta? <a href="/login" style="color: var(--color-ladrillo); font-weight: bold; text-decoration: none;">Inicia sesión aquí</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Derechos reservados a: FELICIANO REYES DYLAN ALEXANDER. HERNANDEZ RAMIREZ RONALD OLIVER.</p>
+    </footer>
+
+    <script src="/JS/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MiBarrio | Mi Comunidad</title>
+    <link rel="stylesheet" href="/CSS/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .menu-ventanas { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .btn-ventana { padding: 12px 20px; border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: bold; font-size: 1.1em; transition: 0.3s; }
+        .btn-ventana:hover { transform: scale(1.05); opacity: 0.9; }
+        
+        .bg-conoce { background-color: #2E7D32; }
+        .bg-huella { background-color: #0288D1; }
+        .bg-consejos { background-color: #F57C00; }
+        .bg-comentarios { background-color: #8E24AA; }
+        .bg-donar { background-color: #D32F2F; }
+        
+        .seccion-ventana { display: none; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .seccion-ventana.activa { display: block; }
+    </style>
+</head>
+<body style="background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh;">
+
+    <header id="menu-principal">
+        <h1 onclick="window.location.href='/'" style="cursor: pointer;">🏡 MI BARRIO</h1>
+        <nav id="nav-dinamico"></nav>
+    </header>
+
+    <main class="contenedor-principal" style="flex: 1; padding: 30px 20px;">
+        
+        <div class="menu-ventanas">
+            <button onclick="abrirVentana('v-conoce')" class="btn-ventana bg-conoce">🏘️ Conoce el Barrio</button>
+            <button onclick="abrirVentana('v-huella')" class="btn-ventana bg-huella">📊 Impacto del Barrio</button>
+            <button onclick="abrirVentana('v-consejos')" class="btn-ventana bg-consejos">💡 Consejos y Mejoras</button>
+            <button onclick="abrirVentana('v-comentarios')" class="btn-ventana bg-comentarios">⭐ Comentarios</button>
+            <button onclick="abrirVentana('v-donar')" class="btn-ventana bg-donar">❤️ Donar</button>
+        </div>
+
+        <!-- VENTANA 1: Conoce el Barrio -->
+        <section id="v-conoce" class="seccion-ventana activa">
+            <h2 style="color: var(--color-barrio); text-align: center; margin-bottom: 20px;">Sobre Nuestra Colonia</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="/IMG/Imagen mi barrio.png" alt="Foto de mi barrio" style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); object-fit: cover;">
+            </div>
+            <p style="text-align: center; color: #666;">▶ Video Documental de la Colonia</p>
+        </section>
+
+  <!-- VENTANA 2: Impacto del Barrio (Reportes) -->
+<section id="v-huella" class="seccion-ventana">
+    <h2 style="color: #0288D1; margin-bottom: 10px;">Medición e Impacto del Barrio</h2>
+    <p style="margin-bottom: 25px; color: #555;">Ayúdanos a medir diferentes aspectos y ubicar los problemas para mejorar nuestro barrio.</p>
+
+    <!-- Formulario de Deslizadores (Sliders) -->
+    <div style="background: #fdfbfe; padding: 25px; border-radius: 12px; border: 1px solid #e1f5fe; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 35px;">
+        
+        <!-- Categoría 1 -->
+        <div style="margin-bottom: 20px;">
+            <label>1. 💧 Fugas de agua o recortes notados esta semana:</label>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                <input type="range" min="0" max="10" value="0" style="flex-grow: 1;" oninput="document.getElementById('val-agua').innerText = this.value + ' reportes'">
+                <strong id="val-agua" style="color: #0288D1; width: 80px;">0 reportes</strong>
+            </div>
+            <input type="text" placeholder="¿En qué calle o esquina? (Ej. Juárez esq. Morelos)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <!-- Categoría 2 -->
+        <div style="margin-bottom: 20px;">
+            <label>2. 🗑️ Bolsas de basura dejadas en la calle a destiempo:</label>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                <input type="range" min="0" max="15" value="3" style="flex-grow: 1;" oninput="document.getElementById('val-basura').innerText = this.value + ' bolsas'">
+                <strong id="val-basura" style="color: #0288D1; width: 80px;">3 bolsas</strong>
+            </div>
+            <input type="text" placeholder="Ubicación de la basura (Ej. Frente al parque municipal)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <!-- Categoría 3 -->
+        <div style="margin-bottom: 20px;">
+            <label>3. 💡 Lámparas fundidas o calles oscuras en tu cuadra:</label>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                <input type="range" min="0" max="10" value="1" style="flex-grow: 1;" oninput="document.getElementById('val-luz').innerText = this.value + ' lámparas'">
+                <strong id="val-luz" style="color: #0288D1; width: 80px;">1 lámparas</strong>
+            </div>
+            <input type="text" placeholder="Ubicación del poste (Ej. Frente a la casa #42)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <!-- NUEVAS CATEGORÍAS -->
+        <div style="margin-bottom: 20px;">
+            <label>4. 🚨 Seguridad o Actividad Sospechosa:</label>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                <input type="range" min="0" max="5" value="0" style="flex-grow: 1;" oninput="document.getElementById('val-seguridad').innerText = this.value + ' incidentes'">
+                <strong id="val-seguridad" style="color: #0288D1; width: 80px;">0 incidentes</strong>
+            </div>
+            <input type="text" placeholder="Breve descripción y lugar (Ej. Auto sospechoso en calle Hidalgo)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 25px;">
+            <label>5. 🐕 Animales perdidos o callejeros (Para rescate):</label>
+            <div style="display: flex; align-items: center; gap: 15px; margin: 10px 0;">
+                <input type="range" min="0" max="10" value="0" style="flex-grow: 1;" oninput="document.getElementById('val-animales').innerText = this.value + ' perritos/gatos'">
+                <strong id="val-animales" style="color: #0288D1; width: 80px;">0 perritos/gatos</strong>
+            </div>
+            <input type="text" placeholder="Descripción (Ej. Perrito café con collar rojo cerca del mercado)" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+       <button onclick="enviarReportesEstructurados()" style="background-color: #0288D1; color: white; padding: 12px; border: none;">Enviar Reportes Estructurados</button>
+    </div>
+
+    <!-- NUEVO: Muro de Reportes Libres -->
+    <div style="background: #e1f5fe; padding: 25px; border-radius: 12px; border-left: 5px solid #0288D1; margin-bottom: 20px;">
+        <h3 style="color: #01579B; margin: 0 0 15px 0;">📢 Muro de Reportes y Avisos Ciudadanos</h3>
+        <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">¿Tienes un reporte que no encaja arriba? Escríbelo aquí para que todos los vecinos lo vean.</p>
+        
+        <textarea id="texto-reporte-libre" rows="3" placeholder="Ej. Hay un cable caído en la esquina de la panadería..." style="width: 100%; padding: 12px; border: 1px solid #b3e5fc; border-radius: 8px; box-sizing: border-box; margin-bottom: 15px; font-family: inherit; resize: vertical;"></textarea>
+        
+        <button onclick="publicarReporteLibre()" style="background-color: #0288D1; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; float: right;">Publicar Aviso</button>
+        <div style="clear: both;"></div>
+    </div>
+
+    <!-- Lista donde aparecerán los reportes -->
+    <h3 style="color: #333; margin-bottom: 15px;">Últimos Reportes de Vecinos</h3>
+    <div id="lista-reportes-muro" style="display: flex; flex-direction: column; gap: 15px;">
+        
+        <!-- Reporte de ejemplo (Ya publicado) -->
+        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 10px;">
+                <span style="font-weight: bold; color: #333;">👤 Don Arturo (Vecino)</span>
+                <span style="background: #ffecb3; color: #f57f17; font-size: 0.8em; padding: 4px 8px; border-radius: 12px; font-weight: bold;">🚨 Precaución</span>
+            </div>
+            <p style="margin: 0; color: #555;">Tengan cuidado al pasar por la avenida principal, hay una coladera sin tapa a la altura de la farmacia.</p>
+        </div>
+
+    </div>
+</section>
+
+       <!-- VENTANA 3: Consejos y Mejoras -->
+<section id="v-consejos" class="seccion-ventana">
+    <h2 style="color: #F57C00; margin-bottom: 10px;">Consejos y Mejoras para el Barrio</h2>
+    <p style="margin-bottom: 25px; color: #555;">Explora buenas prácticas vecinales, propón ideas y apoya las iniciativas de tus vecinos.</p>
+
+    <!-- Estilos para el efecto interactivo de los consejos -->
+    <style>
+        .grid-consejos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tarjeta-consejo {
+            background: #fff3e0;
+            border-left: 5px solid #F57C00;
+            border-radius: 5px;
+            position: relative;
+            min-height: 120px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tarjeta-consejo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(245, 124, 0, 0.2);
+        }
+
+        .consejo-frente {
+            padding: 15px;
+            height: 100%;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+        }
+
+        .consejo-dorso {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #F57C00;
+            color: white;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-consejo:hover .consejo-frente {
+            opacity: 0;
+        }
+        .tarjeta-consejo:hover .consejo-dorso {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Tarjetas Interactivas de Consejos -->
+    <div class="grid-consejos">
+        <!-- Tarjeta 1: Mascotas -->
+        <div class="tarjeta-consejo">
+            <div class="consejo-frente">
+                <h4 style="color: #E65100; margin-bottom: 5px;">🐕 Mascotas Responsables</h4>
+                <p style="font-size: 0.9em; color: #444; margin: 0;">Lleva siempre bolsas para recoger las heces de tu mascota y pasea con correa.</p>
+            </div>
+            <div class="consejo-dorso">
+                <p style="font-size: 0.85em; margin: 0; line-height: 1.4;"><strong>Contexto:</strong> Mantener limpias las calles previene enfermedades e infecciones. Usar correa evita accidentes y peleas de perros.</p>
+            </div>
+        </div>
+
+        <!-- Tarjeta 2: Áreas Verdes -->
+        <div class="tarjeta-consejo">
+            <div class="consejo-frente">
+                <h4 style="color: #E65100; margin-bottom: 5px;">🌳 Áreas Verdes</h4>
+                <p style="font-size: 0.9em; color: #444; margin: 0;">Si ves plantas secas en el parque o banqueta, apóyanos regándolas con agua de reuso.</p>
+            </div>
+            <div class="consejo-dorso">
+                <p style="font-size: 0.85em; margin: 0; line-height: 1.4;"><strong>Contexto:</strong> Los árboles reducen el calor en verano. El agua para lavar verduras o frutas es perfecta para regarlos.</p>
+            </div>
+        </div>
+
+        <!-- Tarjeta 3: Seguridad -->
+        <div class="tarjeta-consejo">
+            <div class="consejo-frente">
+                <h4 style="color: #E65100; margin-bottom: 5px;">🔒 Seguridad Vecinal</h4>
+                <p style="font-size: 0.9em; color: #444; margin: 0;">Asegúrate de iluminar el frente de tu casa y reporta vehículos sospechosos en el grupo.</p>
+            </div>
+            <div class="consejo-dorso">
+                <p style="font-size: 0.85em; margin: 0; line-height: 1.4;"><strong>Contexto:</strong> Las zonas oscuras son vulnerables. Iluminar las fachadas crea un entorno seguro para todos los vecinos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario para Proponer Mejoras -->
+    <div style="background: #fdfbfe; padding: 25px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 30px;">
+        <h3 style="color: #F57C00; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+            💡 Propón una Mejora
+        </h3>
+
+        <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+            <input type="text" id="propuesta-titulo" placeholder="Título de tu idea (Ej. Instalar botes de basura)" style="flex: 2; min-width: 200px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
+            <select id="propuesta-categoria" style="flex: 1; min-width: 150px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; background: white;">
+                <option value="">Categoría...</option>
+                <option value="Limpieza">🗑️ Limpieza</option>
+                <option value="Seguridad">🚨 Seguridad</option>
+                <option value="Infraestructura">🛠️ Infraestructura</option>
+                <option value="Convivencia">🎉 Convivencia</option>
+            </select>
+        </div>
+
+        <textarea id="propuesta-desc" rows="3" placeholder="Describe tu propuesta detalladamente y cómo beneficiará a la cuadra..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; margin-bottom: 15px; font-family: inherit; resize: vertical;"></textarea>
+
+        <button onclick="publicarPropuesta()" style="background-color: #F57C00; color: white; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1em; transition: 0.3s;" onmouseover="this.style.backgroundColor='#E65100'" onmouseout="this.style.backgroundColor='#F57C00'">Publicar Propuesta</button>
+    </div>
+
+    <!-- Lista de Propuestas de la Comunidad -->
+    <h3 style="color: #333; margin-bottom: 15px;">Propuestas de la Comunidad</h3>
+    <div id="lista-propuestas" style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: #333; font-size: 1.05em;">🗑️ Botes de basura orgánicos en el parque</strong>
+                <span style="background: #fff3e0; color: #E65100; font-size: 0.8em; padding: 4px 10px; border-radius: 12px; font-weight: bold;">Limpieza</span>
+            </div>
+            <p style="margin: 0 0 12px 0; color: #555; font-size: 0.9em; line-height: 1.5;">Propongo que la junta de vecinos solicite dos contenedores especiales para desechos orgánicos cerca de la cancha principal.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85em; color: #888; border-top: 1px solid #f9f9f9; padding-top: 10px;">
+                <span>Publicado por: <strong>Vecino Registrado</strong></span>
+                <button onclick="votarPropuesta(this)" style="background: #fff3e0; border: 1px solid #ffe0b2; color: #E65100; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">👍 Apoyar (5)</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- VENTANA 4: Comentarios -->
+        <!-- VENTANA 4: Comentarios -->
+<section id="v-comentarios" class="seccion-ventana">
+    <h2 style="color: #8E24AA; margin-bottom: 10px;">Comentarios y Avisos Vecinales</h2>
+    <p style="margin-bottom: 25px; color: #555;">Un espacio para comunicarnos. Lee lo que dicen tus vecinos, opina y reacciona a sus mensajes.</p>
+
+    <!-- Formulario con diseño Premium -->
+    <div style="background: linear-gradient(to right, #fdfbfe, #f3e5f5); padding: 25px; border-radius: 12px; border: 1px solid #e1bee7; margin-bottom: 35px; box-shadow: 0 4px 15px rgba(142, 36, 170, 0.05);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <span style="font-size: 1.5em;">📝</span>
+            <h3 style="color: #6a1b9a; margin: 0;">Deja tu mensaje</h3>
+        </div>
+        
+        <textarea id="coment-texto" placeholder="Escribe aquí tu aviso, pregunta o reporte... (Ej. ¿Alguien sabe a qué hora pasa el camión de la basura?)" rows="3" style="width: 100%; padding: 15px; border: 2px solid #e1bee7; border-radius: 8px; margin-bottom: 15px; font-family: inherit; resize: vertical; box-sizing: border-box; background: white; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='#8E24AA'" onblur="this.style.borderColor='#e1bee7'"></textarea>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <span style="font-size: 0.85em; color: #888;">💡 Recuerda mantener el respeto y la cordialidad.</span>
+            <button onclick="publicarComentario()" style="background-color: #8E24AA; color: white; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 10px rgba(142, 36, 170, 0.2);" onmouseover="this.style.backgroundColor='#6a1b9a'; this.style.transform='translateY(-2px)'" onmouseout="this.style.backgroundColor='#8E24AA'; this.style.transform='translateY(0)'">Publicar ahora</button>
+        </div>
+    </div>
+
+    <!-- Muro de mensajes con Botones de Interacción -->
+    <h3 style="color: #333; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+        Últimos Mensajes <span style="background: #8E24AA; color: white; font-size: 0.6em; padding: 4px 10px; border-radius: 12px; vertical-align: middle; letter-spacing: 0.5px;">NUEVOS</span>
+    </h3>
+    
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <!-- Comentario 1 -->
+        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 6px; height: 100%; background-color: #8E24AA;"></div>
+            
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                <div style="width: 45px; height: 45px; background: #f3e5f5; color: #8E24AA; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2em;">
+                    DC
+                </div>
+                <div>
+                    <strong style="color: #333; display: block; font-size: 1.1em;">Doña Carmen</strong>
+                    <span style="font-size: 0.85em; color: #888;">Hoy, 10:30 a.m. • Aviso Comunitario</span>
+                </div>
+            </div>
+            <p style="margin: 0 0 15px 0; color: #555; line-height: 1.6; font-size: 0.95em;">Encontré unas llaves en la jardinera de la esquina, las dejé en la tienda de abarrotes por si alguien las busca.</p>
+            
+            <!-- Barra de acciones interactiva -->
+            <div style="display: flex; gap: 25px; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                <button onclick="darLikeComentario(this, 12)" style="background: none; border: none; color: #888; cursor: pointer; font-family: inherit; font-size: 0.95em; display: flex; align-items: center; gap: 5px; padding: 0; transition: 0.2s;" onmouseover="this.style.color='#E91E63'" onmouseout="if(!this.dataset.liked) this.style.color='#888'">
+                    <span style="font-size: 1.2em;">🤍</span> <span class="texto-like">Me gusta (12)</span>
+                </button>
+                <button onclick="responderComentarioVecinal()" style="background: none; border: none; color: #888; cursor: pointer; font-family: inherit; font-size: 0.95em; display: flex; align-items: center; gap: 5px; padding: 0; transition: 0.2s;" onmouseover="this.style.color='#8E24AA'" onmouseout="this.style.color='#888'">
+                    <span style="font-size: 1.2em;">💬</span> Responder (2)
+                </button>
+            </div>
+        </div>
+        
+        <!-- Comentario 2 -->
+        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 6px; height: 100%; background-color: #4CAF50;"></div>
+            
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                <div style="width: 45px; height: 45px; background: #E8F5E9; color: #2E7D32; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2em;">
+                    DA
+                </div>
+                <div>
+                    <strong style="color: #333; display: block; font-size: 1.1em;">Don Arturo</strong>
+                    <span style="font-size: 0.85em; color: #888;">Ayer, 6:15 p.m. • Agradecimiento</span>
+                </div>
+            </div>
+            <p style="margin: 0 0 15px 0; color: #555; line-height: 1.6; font-size: 0.95em;">Quiero agradecer al muchacho que me ayudó a cambiar la llanta de mi carro en la mañana. ¡Aún hay buena gente en la colonia!</p>
+            
+            <!-- Barra de acciones interactiva -->
+            <div style="display: flex; gap: 25px; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 12px;">
+                <button onclick="darLikeComentario(this, 35)" style="background: none; border: none; color: #888; cursor: pointer; font-family: inherit; font-size: 0.95em; display: flex; align-items: center; gap: 5px; padding: 0; transition: 0.2s;" onmouseover="this.style.color='#E91E63'" onmouseout="if(!this.dataset.liked) this.style.color='#888'">
+                    <span style="font-size: 1.2em;">🤍</span> <span class="texto-like">Me gusta (35)</span>
+                </button>
+                <button onclick="responderComentarioVecinal()" style="background: none; border: none; color: #888; cursor: pointer; font-family: inherit; font-size: 0.95em; display: flex; align-items: center; gap: 5px; padding: 0; transition: 0.2s;" onmouseover="this.style.color='#8E24AA'" onmouseout="this.style.color='#888'">
+                    <span style="font-size: 1.2em;">💬</span> Responder
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        <!-- VENTANA 5: Donar -->
+<section id="v-donar" class="seccion-ventana">
+    <h2 style="color: #D32F2F; margin-bottom: 10px;">Fondo Comunitario</h2>
+    <p style="margin-bottom: 20px; color: #555;">Tus aportes voluntarios van directamente a mejorar calles, parques y áreas comunes de nuestra colonia.</p>
+
+    <h3 style="color: #333; margin-bottom: 15px;">Fondo Principal Activo</h3>
+    
+    <div style="background: #FFEBEE; padding: 20px; border-radius: 8px; border-left: 5px solid #D32F2F; margin-bottom: 30px;">
+        <h4 style="margin: 0 0 10px 0; color: #B71C1C;">🤝 Donativos generales</h4>
+        <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #555;">
+            Meta: $10,000 MXN. Faltan: $<span id="monto-faltante">3000</span> MXN.
+        </p>
+        <div style="background: #e0e0e0; border-radius: 10px; height: 12px; width: 100%; overflow: hidden;">
+            <div id="barra-progreso" style="background: #D32F2F; height: 100%; width: 70%; transition: width 0.6s ease-in-out;"></div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div style="background: #fdfbfe; padding: 25px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 30px;">
+        <h3 style="color: #D32F2F; margin-bottom: 15px;">❤️ Haz tu aportación</h3>
+        
+        <select id="donar-proyecto" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; background: white;">
+            <option value="general">🤝 Donativos generales</option>
+            <option value="pintura">🎨 Pintura para el parque (Donativo específico)</option>
+            <option value="lamparas">💡 Reparación de lámparas (Donativo específico)</option>
+            <option value="seguridad">🚨 Cámaras de seguridad (Donativo específico)</option>
+        </select>
+        
+        <input type="number" id="donar-monto" placeholder="Monto sin límite (Ej. 500)" min="1" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px;">
+        
+        <!-- Fíjate que ahora tiene id="btn-donar" -->
+        <button id="btn-donar" style="background-color: #D32F2F; color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1em;">Proceder al Pago Seguro</button>
+    </div>
+
+    <h3 style="color: #333; margin-bottom: 15px;">Últimos Donantes</h3>
+    <ul id="lista-donantes" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+        <li style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+            <span>👤 <strong>Doña Carmen</strong> ha donado para <em>🤝 Donativos generales</em></span>
+            <span style="color: #2E7D32; font-weight: bold;">$100 MXN</span>
+        </li>
+    </ul>
+</section>
+
+    </main>
+
+    <script>
+        // Lógica de las pestañas
+        function abrirVentana(idVentana) {
+            document.querySelectorAll('.seccion-ventana').forEach(ventana => {
+                ventana.classList.remove('activa');
+            });
+            document.getElementById(idVentana).classList.add('activa');
+        }
+
+        // LÓGICA DE BOTONES INTERACTIVOS
+
+        // 1. Enviar Reporte de Impacto
+        function enviarReporte() {
+            Swal.fire({
+                title: '¡Reporte Enviado!',
+                text: 'Tu reporte ha sido canalizado al municipio. Te notificaremos cuando haya avances.',
+                icon: 'success',
+                confirmButtonColor: '#0288D1'
+            }).then(() => {
+                // Limpia los campos tras enviar
+                document.getElementById('rep-agua').value = '';
+                document.getElementById('rep-basura').value = '';
+                document.getElementById('rep-luz').value = '';
+                document.getElementById('rep-bache').value = '';
+            });
+        }
+
+        // 2. Publicar nueva Propuesta
+        function publicarPropuesta() {
+            const titulo = document.getElementById('prop-titulo').value;
+            if(!titulo) return Swal.fire('Error', 'Escribe al menos el título de tu propuesta', 'warning');
+            
+            Swal.fire({
+                title: '¡Propuesta Publicada!',
+                text: 'Los vecinos ya pueden ver tu idea y apoyarla en el muro.',
+                icon: 'success',
+                confirmButtonColor: '#F57C00'
+            }).then(() => {
+                document.getElementById('prop-titulo').value = '';
+                document.getElementById('prop-cat').value = '';
+                document.getElementById('prop-desc').value = '';
+            });
+        }
+
+        // 3. Dar "Apoyar" a la propuesta de un vecino
+        function apoyarPropuesta(boton, apoyosActuales) {
+            if (boton.innerText.includes('Apoyado')) return; // Evita doble voto
+            boton.innerHTML = `👍 Apoyado (${apoyosActuales + 1})`;
+            boton.style.color = '#E65100';
+            boton.style.fontWeight = 'bold';
+        }
+
+        // 4. Comentar en la propuesta de un vecino
+        function comentarPropuesta() {
+            Swal.fire({
+                title: 'Dejar un comentario',
+                input: 'textarea',
+                inputPlaceholder: 'Escribe aquí tu opinión sobre esta propuesta...',
+                showCancelButton: true,
+                confirmButtonText: 'Comentar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#F57C00'
+            }).then((result) => {
+                if (result.isConfirmed && result.value) {
+                    Swal.fire('¡Enviado!', 'Tu comentario se ha agregado exitosamente.', 'success');
+                }
+            });
+        }
+
+        // 5. Publicar en el muro general de Comentarios
+        function publicarComentario() {
+            const texto = document.getElementById('coment-texto').value;
+            if(!texto) return Swal.fire('Cuidado', 'El comentario está vacío.', 'warning');
+            
+            Swal.fire({
+                title: '¡Publicado!',
+                text: 'Tu aviso ahora es visible para toda la colonia.',
+                icon: 'success',
+                confirmButtonColor: '#8E24AA'
+            }).then(() => {
+                document.getElementById('coment-texto').value = '';
+            });
+        }
+
+        // 6. Simular Pasarela de Pago para Donaciones
+       document.addEventListener('DOMContentLoaded', function() {
+    let metaProyecto = 10000;
+    let recaudadoActual = 7000; 
+
+    const botonDonar = document.getElementById('btn-donar');
+    
+    // Si el botón existe, le agregamos la función de clic
+    if (botonDonar) {
+        botonDonar.addEventListener('click', function() {
+            const selectProyecto = document.getElementById('donar-proyecto');
+            const nombreProyecto = selectProyecto.options[selectProyecto.selectedIndex].text;
+            const inputMonto = document.getElementById('donar-monto');
+            const monto = parseFloat(inputMonto.value);
+
+            if (isNaN(monto) || monto <= 0) {
+                alert('Error: Por favor ingresa un monto válido mayor a $0.');
+                return; 
+            }
+
+            const confirmar = confirm(`¿Estás seguro de que deseas donar $${monto.toLocaleString()} MXN para "${nombreProyecto}"?`);
+
+            if (confirmar) {
+                alert('¡Donación Exitosa! Gracias por tu valioso aporte a la comunidad.');
+                
+                // Solo avanza la barra si eligen Donativos Generales
+                if (selectProyecto.value === 'general') {
+                    recaudadoActual += monto;
+                    
+                    let faltante = metaProyecto - recaudadoActual;
+                    if (faltante < 0) faltante = 0; 
+                    
+                    document.getElementById('monto-faltante').innerText = faltante.toLocaleString();
+
+                    let porcentaje = (recaudadoActual / metaProyecto) * 100;
+                    if (porcentaje > 100) porcentaje = 100; 
+                    document.getElementById('barra-progreso').style.width = porcentaje + '%';
+                }
+
+                // Agrega a la lista de donantes
+                const lista = document.getElementById('lista-donantes');
+                const nuevoLi = document.createElement('li');
+                nuevoLi.style = "background: #F1F8E9; padding: 15px; border-radius: 8px; border: 1px solid #C5E1A5; display: flex; justify-content: space-between; align-items: center;";
+                nuevoLi.innerHTML = `<span>👤 <strong>Tú</strong> has donado para <em>${nombreProyecto}</em></span> <span style="color: #2E7D32; font-weight: bold;">$${monto.toLocaleString()} MXN</span>`;
+                
+                lista.insertBefore(nuevoLi, lista.firstChild);
+                inputMonto.value = ''; // Limpia el cajón
+            }
+        });
+    }
+});
+    </script>
+    <script src="/JS/scripts.js"></script>
+</body>
+</html>
